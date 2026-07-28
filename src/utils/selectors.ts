@@ -8,6 +8,7 @@ import {
   WorkoutSet,
 } from '../types';
 import { getDayOfWeekFromDate, getTodayIso } from './dateHelpers';
+import { generateId } from './id';
 import { parseISO, startOfDay } from 'date-fns';
 
 export function getTodayRoutineId(
@@ -109,6 +110,7 @@ export function setsToExerciseDrafts(
 
     if (exerciseSets.length === 0) {
       return {
+        id: generateId(),
         exerciseName: name,
         sets: lastExerciseSets.map((ls: WorkoutSet, i: number) => ({
           id: `draft-${name}-${i}`,
@@ -123,6 +125,7 @@ export function setsToExerciseDrafts(
     }
 
     return {
+      id: generateId(),
       exerciseName: name,
       sets: exerciseSets.map((s, i) => {
         const last = lastExerciseSets[i];
@@ -150,6 +153,7 @@ export function buildDraftFromLastSession(
 
   if (routine.defaultExercises.length > 0) {
     return routine.defaultExercises.map((name) => ({
+      id: generateId(),
       exerciseName: name,
       sets: [
         {
@@ -165,6 +169,7 @@ export function buildDraftFromLastSession(
 
   return [
     {
+      id: generateId(),
       exerciseName: 'Exercise 1',
       sets: [
         {

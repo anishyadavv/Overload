@@ -45,6 +45,7 @@ export interface SessionWithSets {
 }
 
 export interface ExerciseDraft {
+  id: string;
   exerciseName: string;
   sets: SetDraft[];
 }

@@ -1,4 +1,4 @@
-# WorkoutLog
+# Overload
 
 A React Native (Expo) gym tracking app driven by a weekly workout plan.
 
@@ -17,24 +17,32 @@ A React Native (Expo) gym tracking app driven by a weekly workout plan.
 - React Native + Expo (managed workflow)
 - TypeScript
 - React Navigation (bottom tabs + stack)
-- Zustand + AsyncStorage (persistent state)
+- Zustand + react-native-mmkv (persistent state)
 - date-fns, expo-haptics, react-native-keyboard-aware-scroll-view
 
 ## Getting Started
 
 ```bash
-cd WorkoutLog
+cd Overload
 npm install
 npm start
 ```
 
-### Run with Expo Go
+### Run on Android (development build)
 
-1. Install **Expo Go** on your Android phone (Play Store) — must support **SDK 56**
-2. Make sure your phone and PC are on the same Wi-Fi network
-3. Run `npm start` and scan the QR code with Expo Go
+`react-native-mmkv` requires native modules — use a **development build** (not Expo Go):
 
-If you see "Project is incompatible", update Expo Go from the Play Store, or install the matching version from https://expo.dev/go (select SDK 56).
+```bash
+npx expo prebuild --platform android   # first time only
+npm run android
+```
+
+Day-to-day dev after the first build:
+
+```bash
+npm start
+# Open the dev client on your device
+```
 
 ## Testing Guide
 
@@ -73,7 +81,7 @@ src/
   components/   # ExerciseRow, SetInput, DayRoutineRow, LastSessionCard, LogSessionView
   navigation/   # Tab + Stack navigators
   screens/      # Home, PlanSetup, WeeklyPlan, History, SessionDetail, Progress
-  store/        # Zustand + AsyncStorage persistence
+  store/        # Zustand + MMKV persistence
   types/        # Flat relational data model
   utils/        # dateHelpers, selectors, chartCalculations
   theme/        # Dark mode colors

@@ -8,7 +8,7 @@ import {
   Session,
   WorkoutSet,
 } from '../types';
-import { persistStorage } from './persistStorage';
+import { mmkvStorage } from './mmkvStorage';
 import { generateId } from '../utils/id';
 import { getTodayIso } from '../utils/dateHelpers';
 import { DAYS_OF_WEEK } from '../utils/dateHelpers';
@@ -148,7 +148,7 @@ export const useWorkoutStore = create<WorkoutStore>()(
     }),
     {
       name: 'workout-log-state',
-      storage: createJSONStorage(() => persistStorage),
+      storage: createJSONStorage(() => mmkvStorage),
     },
   ),
 );

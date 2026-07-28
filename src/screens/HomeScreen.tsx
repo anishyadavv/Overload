@@ -28,7 +28,7 @@ export function HomeScreen() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Text style={styles.greeting}>WorkoutLog</Text>
+        <Text style={styles.greeting}>Overload</Text>
         <Text style={styles.dayLine}>
           Today is {dayName}
           {routine ? ` — ${routine.name}` : ''}

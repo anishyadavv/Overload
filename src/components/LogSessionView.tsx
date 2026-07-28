@@ -72,10 +72,11 @@ export function LogSessionView({ routine, onSaved }: LogSessionViewProps) {
   };
 
   const addExercise = () => {
-    setExercises([
-      ...exercises,
+    setExercises((prev) => [
+      ...prev,
       {
-        exerciseName: `Exercise ${exercises.length + 1}`,
+        id: generateId(),
+        exerciseName: `Exercise ${prev.length + 1}`,
         sets: [
           {
             id: generateId(),
@@ -89,9 +90,11 @@ export function LogSessionView({ routine, onSaved }: LogSessionViewProps) {
     ]);
   };
 
-  const removeExercise = (index: number) => {
-    if (exercises.length <= 1) return;
-    setExercises(exercises.filter((_, i) => i !== index));
+  const removeExercise = (exerciseId: string) => {
+    setExercises((prev) => {
+      if (prev.length <= 1) return prev;
+      return prev.filter((e) => e.id !== exerciseId);
+    });
   };
 
   return (
@@ -120,16 +123,16 @@ export function LogSessionView({ routine, onSaved }: LogSessionViewProps) {
           )}
         </View>
 
-        {exercises.map((exercise, index) => (
+        {exercises.map((exercise) => (
           <ExerciseRow
-            key={`${exercise.exerciseName}-${index}`}
+            key={exercise.id}
             exercise={exercise}
             onChange={(updated) => {
-              const next = [...exercises];
-              next[index] = updated;
-              setExercises(next);
+              setExercises((prev) =>
+                prev.map((e) => (e.id === updated.id ? updated : e)),
+              );
             }}
-            onRemove={() => removeExercise(index)}
+            onRemove={() => removeExercise(exercise.id)}
             showRemove={exercises.length > 1}
           />
         ))}

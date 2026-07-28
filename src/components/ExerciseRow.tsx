@@ -63,7 +63,6 @@ export function ExerciseRow({
           onChangeText={(name) => onChange({ ...exercise, exerciseName: name })}
           placeholder="Exercise name"
           placeholderTextColor={colors.placeholder}
-          selectTextOnFocus
         />
         {showRemove && onRemove && (
           <TouchableOpacity onPress={onRemove}>
